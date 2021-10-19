@@ -3,6 +3,7 @@ set -o pipefail
 
 case "$1" in
     -n|--dry-run)
+	set +x
 	readonly DRYRUN=yes
 	shift
 	;;
