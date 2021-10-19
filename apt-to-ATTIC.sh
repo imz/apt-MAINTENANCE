@@ -4,10 +4,17 @@ set -o pipefail
 case "$1" in
     -n|--dry-run)
 	readonly DRYRUN=YES
+	readonly DRYRUN_RECURSIVE=
+	shift
+	;;
+    --dry-run-rec*)
+	readonly DRYRUN=YES
+	readonly DRYRUN_RECURSIVE=YES
 	shift
 	;;
     *)
 	readonly DRYRUN=
+	readonly DRYRUN_RECURSIVE=
 	;;
 esac
 readonly SUFFIX="$1"; shift
@@ -31,7 +38,9 @@ do
 	printf >&2 'Skipping already saved branch %s\n' "$b"
 	continue
     fi
-    "$MY"/save-in-ATTIC.sh ${DRYRUN:+--dry-run} "$SUFFIX" "$b"
+    printf >&2 'Saving branch %s\n' "$b"
+    [ -n "$DRYRUN" ] && [ -z "$DRYRUN_RECURSIVE" ] ||
+	"$MY"/save-in-ATTIC.sh ${DRYRUN_RECURSIVE:+--dry-run} "$SUFFIX" "$b"
 done
 
 ${DRYRUN:+echo} git branch -f latest-in-ATTIC cksum-types-HARDCODE-sha1
