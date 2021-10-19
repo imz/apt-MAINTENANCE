@@ -21,5 +21,5 @@ branch_in_ATTIC="$base$SUFFIX"/"$BRANCH"
 
 [ "$(git rev-parse "$branch_in_ATTIC" 2>/dev/null)" = "$(git rev-parse "$BRANCH")" ] ||
     ${DRYRUN:+echo} git branch "$branch_in_ATTIC" "$BRANCH"
-${DRYRUN:+echo} git push -u ATTIC "$branch_in_ATTIC" --follow-tags
+${DRYRUN:+echo} git push -u ATTIC "$branch_in_ATTIC" # --follow-tags
 ${DRYRUN:+echo} git branch -d "$branch_in_ATTIC"
