@@ -1,4 +1,4 @@
-#!/bin/sh -efuCx
+#!/bin/bash -efuCx
 set -o pipefail
 
 case "$1" in
