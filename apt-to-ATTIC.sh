@@ -27,8 +27,7 @@ readonly -a BRANCHES=(
 	  --format='%(refname:short)' \
 	  | fgrep -v -x latest-in-ATTIC \
 	  | fgrep -v -x callbacks \
-	  | fgrep -v -x test-corrupt-lists-REVERT \
-	  | fgrep -v -x test-cksum-of-pkglist-index-HARDCODE
+	  | fgrep -v -x test-corrupt-lists-REVERT
     )
 )
 
