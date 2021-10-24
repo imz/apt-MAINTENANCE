@@ -26,8 +26,7 @@ readonly -a BRANCHES=(
 	  --contains 0.5.15lorg2-alt72 \
 	  --format='%(refname:short)' \
 	  | fgrep -v -x latest-in-ATTIC \
-	  | fgrep -v -x callbacks \
-	  | fgrep -v -x test-corrupt-lists-REVERT
+	  | fgrep -v -x callbacks
     )
 )
 
