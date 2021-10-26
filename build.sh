@@ -33,13 +33,36 @@ readonly X_rev=wip
 #readonly X_rev=api-for-pk
 
 # --disable check ?
-# gear -t "$X_rev" --no-compress --hasher -- \
-#      hsh --without-stuff "$HSHDIR" \
-#      --build-args="--define 'disttag sisyphus+$(git rev-parse "$X_rev")'"
-
 gear -t "$X_rev" --no-compress --hasher -- \
-     hsh-rebuild "$HSHDIR" \
-     --args="--define 'disttag sisyphus+$(git rev-parse "$X_rev")'"
+     hsh --without-stuff "$HSHDIR" \
+     --build-args="--define 'disttag sisyphus+$(git rev-parse "$X_rev")'"
+
+# gear -t "$X_rev" --no-compress --hasher -- \
+#      hsh-rebuild "$HSHDIR" \
+#      --args="--define 'disttag sisyphus+$(git rev-parse "$X_rev")'"
+
+############################################################
+cd ../apt-repo-tools/
+readonly W_rev=@ALT/sha2
+#readonly W_rev=gears/sisyphus
+
+# --disable check ? (anyway it will be tested in girar)
+gear -t "$W_rev" --no-compress --hasher -- \
+     hsh --with-stuff "$HSHDIR" \
+     --build-args="--define 'disttag sisyphus+$(git rev-parse "$W_rev")' --disable check"
+
+# gear -t "$W_rev" --no-compress --hasher -- \
+#      hsh-rebuild "$HSHDIR" \
+#      --args="--define 'disttag sisyphus+$(git rev-parse "$W_rev")'"
+
+hsh --with-stuff --ini "$HSHDIR"
+hsh-install "$HSHDIR" apt-basic-checkinstall
+
+hsh --with-stuff --ini "$HSHDIR"
+hsh-install "$HSHDIR" apt-checkinstall
+
+hsh --with-stuff --ini "$HSHDIR"
+hsh-install "$HSHDIR" apt-heavyload-checkinstall
 
 # ############################################################
 # cd ../packagekit/
@@ -58,18 +81,6 @@ gear -t "$X_rev" --no-compress --hasher -- \
 
 # ../apt/test-pk-in-hsh.sh --ini SAME "$HSHDIR"
 
-
-# ############################################################
-# cd ../apt-repo-tools/
-# readonly W_rev=gears/sisyphus
-
-# gear -t "$W_rev" --no-compress --hasher -- \
-#      hsh --with-stuff "$HSHDIR" \
-#      --build-args="--define 'disttag sisyphus+$(git rev-parse "$W_rev")'"
-
-# # gear -t "$W_rev" --no-compress --hasher -- \
-# #      hsh-rebuild "$HSHDIR" \
-# #      --args="--define 'disttag sisyphus+$(git rev-parse "$W_rev")'"
 
 # ############################################################
 # cd ../synaptic/
