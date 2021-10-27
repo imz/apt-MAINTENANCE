@@ -61,8 +61,8 @@ hsh-install "$HSHDIR" apt-basic-checkinstall
 hsh --with-stuff --ini "$HSHDIR"
 hsh-install "$HSHDIR" apt-checkinstall
 
-hsh --with-stuff --ini "$HSHDIR"
-hsh-install "$HSHDIR" apt-heavyload-checkinstall
+# hsh --with-stuff --ini "$HSHDIR"
+# hsh-install "$HSHDIR" apt-heavyload-checkinstall
 
 # ############################################################
 # cd ../packagekit/
