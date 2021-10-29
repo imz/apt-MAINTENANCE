@@ -40,5 +40,5 @@ do
 	"$MY"/save-in-ATTIC.sh ${DRYRUN_RECURSIVE:+--dry-run} "$SUFFIX" "$b"
 done
 
-${DRYRUN:+echo} git branch -f latest-in-ATTIC archive-cksum-HARDCODE-blake2b
+${DRYRUN:+echo} git branch -f latest-in-ATTIC alt
 ${DRYRUN:+echo} git push -u ATTIC latest-in-ATTIC -f
