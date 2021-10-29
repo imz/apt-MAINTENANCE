@@ -25,8 +25,7 @@ readonly -a BRANCHES=(
     $(git --no-pager branch \
 	  --contains 0.5.15lorg2-alt72 \
 	  --format='%(refname:short)' \
-	  | fgrep -v -x latest-in-ATTIC \
-	  | fgrep -v -x callbacks
+	  | fgrep -v -x latest-in-ATTIC
     )
 )
 
@@ -41,5 +40,5 @@ do
 	"$MY"/save-in-ATTIC.sh ${DRYRUN_RECURSIVE:+--dry-run} "$SUFFIX" "$b"
 done
 
-${DRYRUN:+echo} git branch -f latest-in-ATTIC cksum-types-HARDCODE-blake2b-for-pkglist-indices
+${DRYRUN:+echo} git branch -f latest-in-ATTIC archive-cksum-HARDCODE-blake2b
 ${DRYRUN:+echo} git push -u ATTIC latest-in-ATTIC -f
