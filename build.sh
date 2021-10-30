@@ -64,22 +64,22 @@ hsh-install "$HSHDIR" apt-checkinstall
 # hsh --with-stuff --ini "$HSHDIR"
 # hsh-install "$HSHDIR" apt-heavyload-checkinstall
 
-# ############################################################
-# cd ../packagekit/
-# readonly Z_rev=gears/sisyphus
-# #readonly Z_rev=new-ABI-tmp
-# #readonly Z_rev=lazyCacheFile
-# #readonly Z_rev=lazyCacheFile~1
+############################################################
+cd ../packagekit/
+readonly Z_rev=gears/sisyphus
+#readonly Z_rev=new-ABI-tmp
+#readonly Z_rev=lazyCacheFile
+#readonly Z_rev=lazyCacheFile~1
+
+gear -t "$Z_rev" --no-compress --hasher -- \
+     hsh --with-stuff "$HSHDIR" \
+     --build-args="--define 'disttag sisyphus+$(git rev-parse "$Z_rev")'"
 
 # gear -t "$Z_rev" --no-compress --hasher -- \
-#      hsh --with-stuff "$HSHDIR" \
-#      --build-args="--define 'disttag sisyphus+$(git rev-parse "$Z_rev")'"
+#      hsh-rebuild "$HSHDIR" \
+#      --args="--define 'disttag sisyphus+$(git rev-parse "$Z_rev")'"
 
-# # gear -t "$Z_rev" --no-compress --hasher -- \
-# #      hsh-rebuild "$HSHDIR" \
-# #      --args="--define 'disttag sisyphus+$(git rev-parse "$Z_rev")'"
-
-# ../apt/test-pk-in-hsh.sh --ini SAME "$HSHDIR"
+../apt/test-pk-in-hsh.sh --ini SAME "$HSHDIR"
 
 
 # ############################################################
@@ -114,24 +114,24 @@ hsh-install "$HSHDIR" apt-checkinstall
 # #      --args="--define 'disttag sisyphus+$(git rev-parse "$A_rev")'"
 
 
-# ############################################################
-# cd ../aptitude/
-# readonly B_rev=gears/sisyphus
-# #readonly B_rev=alt
-# #readonly B_rev=alt~2
-# #readonly B_rev=unique_ptr-to-return-mmap
-# # ctor wants ref
-# #readonly B_rev=unique_ptr-to-return-mmap^
-# #readonly B_rev=lazyCacheFile
-# #readonly B_rev=p8
+############################################################
+cd ../aptitude/
+readonly B_rev=gears/sisyphus
+#readonly B_rev=alt
+#readonly B_rev=alt~2
+#readonly B_rev=unique_ptr-to-return-mmap
+# ctor wants ref
+#readonly B_rev=unique_ptr-to-return-mmap^
+#readonly B_rev=lazyCacheFile
+#readonly B_rev=p8
+
+gear -t "$B_rev" --no-compress --hasher -- \
+     hsh --with-stuff "$HSHDIR" \
+     --build-args="--define 'disttag sisyphus+$(git rev-parse "$B_rev")'"
 
 # gear -t "$B_rev" --no-compress --hasher -- \
-#      hsh --with-stuff "$HSHDIR" \
-#      --build-args="--define 'disttag sisyphus+$(git rev-parse "$B_rev")'"
-
-# # gear -t "$B_rev" --no-compress --hasher -- \
-# #      hsh-rebuild "$HSHDIR" \
-# #      --args="--define 'disttag sisyphus+$(git rev-parse "$B_rev")'"
+#      hsh-rebuild "$HSHDIR" \
+#      --args="--define 'disttag sisyphus+$(git rev-parse "$B_rev")'"
 
 # ############################################################
 # cd ../perl-AptPkg/
