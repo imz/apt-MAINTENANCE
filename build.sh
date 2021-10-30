@@ -79,7 +79,7 @@ gear -t "$Z_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
 #      --args="--define 'disttag sisyphus+$(git rev-parse "$Z_rev")'"
 
-../apt/test-pk-in-hsh.sh --ini SAME "$HSHDIR"
+PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "$HSHDIR"
 
 
 # ############################################################
