@@ -43,8 +43,8 @@ gear -t "$X_rev" --no-compress --hasher -- \
 
 ############################################################
 cd ../apt-repo-tools/
-readonly W_rev=@ALT/sha2
-#readonly W_rev=gears/sisyphus
+#readonly W_rev=@ALT/sha2
+readonly W_rev=gears/sisyphus
 
 # --disable check ? (anyway it will be tested in girar)
 gear -t "$W_rev" --no-compress --hasher -- \
@@ -66,6 +66,7 @@ hsh-install "$HSHDIR" apt-checkinstall
 
 ############################################################
 cd ../packagekit/
+#readonly Z_rev=mcpain@ALT/sisyphus
 readonly Z_rev=gears/sisyphus
 #readonly Z_rev=new-ABI-tmp
 #readonly Z_rev=lazyCacheFile
