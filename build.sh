@@ -134,16 +134,16 @@ gear -t "$B_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
 #      --args="--define 'disttag sisyphus+$(git rev-parse "$B_rev")'"
 
-# ############################################################
-# cd ../perl-AptPkg/
-# readonly C_rev=gears/sisyphus
-# #readonly C_rev=master
-# #readonly C_rev=lazyCacheFile
+############################################################
+cd ../perl-AptPkg/
+readonly C_rev=gears/sisyphus
+#readonly C_rev=master
+#readonly C_rev=lazyCacheFile
+
+gear -t "$C_rev" --no-compress --hasher -- \
+     hsh --with-stuff "$HSHDIR" \
+     --build-args="--define 'disttag sisyphus+$(git rev-parse "$C_rev")'"
 
 # gear -t "$C_rev" --no-compress --hasher -- \
-#      hsh --with-stuff "$HSHDIR" \
-#      --build-args="--define 'disttag sisyphus+$(git rev-parse "$C_rev")'"
-
-# # gear -t "$C_rev" --no-compress --hasher -- \
-# #      hsh-rebuild "$HSHDIR" \
-# #      --args="--define 'disttag sisyphus+$(git rev-parse "$C_rev")'"
+#      hsh-rebuild "$HSHDIR" \
+#      --args="--define 'disttag sisyphus+$(git rev-parse "$C_rev")'"
