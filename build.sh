@@ -58,12 +58,6 @@ gear -t "$W_rev" --no-compress --hasher -- \
 hsh --with-stuff --ini "$HSHDIR"
 hsh-install "$HSHDIR" apt-basic-checkinstall
 
-hsh --with-stuff --ini "$HSHDIR"
-hsh-install "$HSHDIR" apt-checkinstall
-
-# hsh --with-stuff --ini "$HSHDIR"
-# hsh-install "$HSHDIR" apt-heavyload-checkinstall
-
 ############################################################
 cd ../packagekit/
 #readonly Z_rev=mcpain@ALT/sisyphus
@@ -80,10 +74,18 @@ gear -t "$Z_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
 #      --args="--define 'disttag sisyphus+$(git rev-parse "$Z_rev")'"
 
+hsh --with-stuff --ini "$HSHDIR"
+hsh-install "$HSHDIR" apt-under-pkdirect-checkinstall
+
 PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "$HSHDIR"
 
+# More thorougher (longer) tests.
 
+hsh --with-stuff --ini "$HSHDIR"
+hsh-install "$HSHDIR" apt-checkinstall
 
+hsh --with-stuff --ini "$HSHDIR"
+hsh-install "$HSHDIR" apt-xxtra-heavy-load-checkinstall
 
 ############################################################
 cd ../synaptic/
