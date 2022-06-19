@@ -83,36 +83,38 @@ gear -t "$Z_rev" --no-compress --hasher -- \
 PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "$HSHDIR"
 
 
-# ############################################################
-# cd ../synaptic/
-# readonly Y_rev=gears/sisyphus
-# #readonly Y_rev=sisyphus
-# # C++17
-# #readonly Y_rev=sisyphus~3
-# # unique_ptr returned (APT: fix-null-mmap)
-# #readonly Y_rev=sisyphus~4
-# # ctor wants ref
-# #readonly Y_rev=sisyphus~5
-# #readonly Y_rev=sisyphus~6
 
-# gear -t "$Y_rev" --no-compress --hasher -- \
-#      hsh --with-stuff "$HSHDIR" \
-#      --build-args="--define 'disttag sisyphus+$(git rev-parse "$Y_rev")'"
 
-# ############################################################
-# cd ../apt-indicator/
-# #readonly A_rev=sisyphus
-# readonly A_rev=gears/sisyphus
-# #readonly A_rev=lazyCacheFile
-# #readonly A_rev=revert-apt-ABI
+############################################################
+cd ../synaptic/
+readonly Y_rev=gears/sisyphus
+#readonly Y_rev=sisyphus
+# C++17
+#readonly Y_rev=sisyphus~3
+# unique_ptr returned (APT: fix-null-mmap)
+#readonly Y_rev=sisyphus~4
+# ctor wants ref
+#readonly Y_rev=sisyphus~5
+#readonly Y_rev=sisyphus~6
+
+gear -t "$Y_rev" --no-compress --hasher -- \
+     hsh --with-stuff "$HSHDIR" \
+     --build-args="--define 'disttag sisyphus+$(git rev-parse "$Y_rev")'"
+
+############################################################
+cd ../apt-indicator/
+#readonly A_rev=sisyphus
+readonly A_rev=gears/sisyphus
+#readonly A_rev=lazyCacheFile
+#readonly A_rev=revert-apt-ABI
+
+gear -t "$A_rev" --no-compress --hasher -- \
+     hsh --with-stuff "$HSHDIR" \
+     --build-args="--define 'disttag sisyphus+$(git rev-parse "$A_rev")'"
 
 # gear -t "$A_rev" --no-compress --hasher -- \
-#      hsh --with-stuff "$HSHDIR" \
-#      --build-args="--define 'disttag sisyphus+$(git rev-parse "$A_rev")'"
-
-# # gear -t "$A_rev" --no-compress --hasher -- \
-# #      hsh-rebuild "$HSHDIR" \
-# #      --args="--define 'disttag sisyphus+$(git rev-parse "$A_rev")'"
+#      hsh-rebuild "$HSHDIR" \
+#      --args="--define 'disttag sisyphus+$(git rev-parse "$A_rev")'"
 
 
 ############################################################
