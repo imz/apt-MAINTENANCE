@@ -2,6 +2,7 @@
 set -o pipefail
 
 readonly HSHDIR="$1"; shift
+readonly HSHARGS=("$HSHDIR" "$@")
 
 #hsh --clean "$HSHDIR"
 # Don't delete the cache:
@@ -34,7 +35,7 @@ readonly X_rev=wip
 
 # --disable check ?
 gear -t "$X_rev" --no-compress --hasher -- \
-     hsh --without-stuff "$HSHDIR" \
+     hsh --without-stuff "${HSHARGS[@]}" \
      --build-args="--define 'disttag sisyphus+$(git rev-parse "$X_rev")'"
 
 # gear -t "$X_rev" --no-compress --hasher -- \
@@ -48,14 +49,14 @@ readonly W_rev=gears/sisyphus
 
 # --disable check ? (anyway it will be tested in girar)
 gear -t "$W_rev" --no-compress --hasher -- \
-     hsh --with-stuff "$HSHDIR" \
+     hsh --with-stuff "${HSHARGS[@]}" \
      --build-args="--define 'disttag sisyphus+$(git rev-parse "$W_rev")' --disable check"
 
 # gear -t "$W_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
 #      --args="--define 'disttag sisyphus+$(git rev-parse "$W_rev")'"
 
-hsh --with-stuff --ini "$HSHDIR"
+hsh --with-stuff --ini "${HSHARGS[@]}"
 hsh-install "$HSHDIR" apt-basic-checkinstall
 
 ############################################################
@@ -67,24 +68,24 @@ readonly Z_rev=gears/sisyphus
 #readonly Z_rev=lazyCacheFile~1
 
 gear -t "$Z_rev" --no-compress --hasher -- \
-     hsh --with-stuff "$HSHDIR" \
+     hsh --with-stuff "${HSHARGS[@]}" \
      --build-args="--define 'disttag sisyphus+$(git rev-parse "$Z_rev")'"
 
 # gear -t "$Z_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
 #      --args="--define 'disttag sisyphus+$(git rev-parse "$Z_rev")'"
 
-hsh --with-stuff --ini "$HSHDIR"
+hsh --with-stuff --ini "${HSHARGS[@]}"
 hsh-install "$HSHDIR" apt-under-pkdirect-checkinstall
 
 PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "$HSHDIR"
 
 # More thorougher (longer) tests.
 
-hsh --with-stuff --ini "$HSHDIR"
+hsh --with-stuff --ini "${HSHARGS[@]}"
 hsh-install "$HSHDIR" apt-checkinstall
 
-hsh --with-stuff --ini "$HSHDIR"
+hsh --with-stuff --ini "${HSHARGS[@]}"
 hsh-install "$HSHDIR" apt-xxtra-heavy-load-checkinstall
 
 ############################################################
@@ -100,7 +101,7 @@ readonly Y_rev=gears/sisyphus
 #readonly Y_rev=sisyphus~6
 
 gear -t "$Y_rev" --no-compress --hasher -- \
-     hsh --with-stuff "$HSHDIR" \
+     hsh --with-stuff "${HSHARGS[@]}" \
      --build-args="--define 'disttag sisyphus+$(git rev-parse "$Y_rev")'"
 
 ############################################################
@@ -111,7 +112,7 @@ readonly A_rev=gears/sisyphus
 #readonly A_rev=revert-apt-ABI
 
 gear -t "$A_rev" --no-compress --hasher -- \
-     hsh --with-stuff "$HSHDIR" \
+     hsh --with-stuff "${HSHARGS[@]}" \
      --build-args="--define 'disttag sisyphus+$(git rev-parse "$A_rev")'"
 
 # gear -t "$A_rev" --no-compress --hasher -- \
@@ -131,7 +132,7 @@ readonly B_rev=gears/sisyphus
 #readonly B_rev=p8
 
 gear -t "$B_rev" --no-compress --hasher -- \
-     hsh --with-stuff "$HSHDIR" \
+     hsh --with-stuff "${HSHARGS[@]}" \
      --build-args="--define 'disttag sisyphus+$(git rev-parse "$B_rev")'"
 
 # gear -t "$B_rev" --no-compress --hasher -- \
@@ -145,7 +146,7 @@ readonly C_rev=gears/sisyphus
 #readonly C_rev=lazyCacheFile
 
 gear -t "$C_rev" --no-compress --hasher -- \
-     hsh --with-stuff "$HSHDIR" \
+     hsh --with-stuff "${HSHARGS[@]}" \
      --build-args="--define 'disttag sisyphus+$(git rev-parse "$C_rev")'"
 
 # gear -t "$C_rev" --no-compress --hasher -- \
