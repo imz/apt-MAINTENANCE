@@ -78,7 +78,7 @@ gear -t "$Z_rev" --no-compress --hasher -- \
 hsh --with-stuff --ini "${HSHARGS[@]}"
 hsh-install "$HSHDIR" apt-under-pkdirect-checkinstall
 
-PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "$HSHDIR"
+PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "${HSHARGS[@]}"
 
 # More thorougher (longer) tests.
 
