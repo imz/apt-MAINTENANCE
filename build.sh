@@ -36,11 +36,11 @@ readonly X_rev=wip
 # --disable check ?
 gear -t "$X_rev" --no-compress --hasher -- \
      hsh --without-stuff "${HSHARGS[@]}" \
-     --build-args="--define 'disttag %_priority_distbranch+$(git rev-parse "$X_rev")'"
+     --build-args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$X_rev")'"
 
 # gear -t "$X_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
-#      --args="--define 'disttag %_priority_distbranch+$(git rev-parse "$X_rev")'"
+#      --args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$X_rev")'"
 
 ############################################################
 cd ../apt-repo-tools/
@@ -50,11 +50,11 @@ readonly W_rev=gears/sisyphus
 # --disable check ? (anyway it will be tested in girar)
 gear -t "$W_rev" --no-compress --hasher -- \
      hsh --with-stuff "${HSHARGS[@]}" \
-     --build-args="--define 'disttag %_priority_distbranch+$(git rev-parse "$W_rev")' --disable check"
+     --build-args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$W_rev")' --disable check"
 
 # gear -t "$W_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
-#      --args="--define 'disttag %_priority_distbranch+$(git rev-parse "$W_rev")'"
+#      --args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$W_rev")'"
 
 hsh --with-stuff --ini "${HSHARGS[@]}"
 hsh-install "$HSHDIR" apt-basic-checkinstall
@@ -69,11 +69,11 @@ readonly Z_rev=gears/sisyphus
 
 gear -t "$Z_rev" --no-compress --hasher -- \
      hsh --with-stuff "${HSHARGS[@]}" \
-     --build-args="--define 'disttag %_priority_distbranch+$(git rev-parse "$Z_rev")'"
+     --build-args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$Z_rev")'"
 
 # gear -t "$Z_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
-#      --args="--define 'disttag %_priority_distbranch+$(git rev-parse "$Z_rev")'"
+#      --args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$Z_rev")'"
 
 hsh --with-stuff --ini "${HSHARGS[@]}"
 hsh-install "$HSHDIR" apt-under-pkdirect-checkinstall
@@ -102,7 +102,7 @@ readonly Y_rev=gears/sisyphus
 
 gear -t "$Y_rev" --no-compress --hasher -- \
      hsh --with-stuff "${HSHARGS[@]}" \
-     --build-args="--define 'disttag %_priority_distbranch+$(git rev-parse "$Y_rev")'"
+     --build-args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$Y_rev")'"
 
 ############################################################
 cd ../apt-indicator/
@@ -113,11 +113,11 @@ readonly A_rev=gears/sisyphus
 
 gear -t "$A_rev" --no-compress --hasher -- \
      hsh --with-stuff "${HSHARGS[@]}" \
-     --build-args="--define 'disttag %_priority_distbranch+$(git rev-parse "$A_rev")'"
+     --build-args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$A_rev")'"
 
 # gear -t "$A_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
-#      --args="--define 'disttag %_priority_distbranch+$(git rev-parse "$A_rev")'"
+#      --args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$A_rev")'"
 
 
 ############################################################
@@ -133,11 +133,11 @@ readonly B_rev=gears/sisyphus
 
 gear -t "$B_rev" --no-compress --hasher -- \
      hsh --with-stuff "${HSHARGS[@]}" \
-     --build-args="--define 'disttag %_priority_distbranch+$(git rev-parse "$B_rev")'"
+     --build-args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$B_rev")'"
 
 # gear -t "$B_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
-#      --args="--define 'disttag %_priority_distbranch+$(git rev-parse "$B_rev")'"
+#      --args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$B_rev")'"
 
 ############################################################
 cd ../perl-AptPkg/
@@ -147,8 +147,8 @@ readonly C_rev=gears/sisyphus
 
 gear -t "$C_rev" --no-compress --hasher -- \
      hsh --with-stuff "${HSHARGS[@]}" \
-     --build-args="--define 'disttag %_priority_distbranch+$(git rev-parse "$C_rev")'"
+     --build-args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$C_rev")'"
 
 # gear -t "$C_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
-#      --args="--define 'disttag %_priority_distbranch+$(git rev-parse "$C_rev")'"
+#      --args="--define 'disttag %(rpm --eval %_priority_distbranch)+$(git rev-parse "$C_rev")'"
