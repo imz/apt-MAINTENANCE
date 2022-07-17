@@ -80,14 +80,6 @@ hsh-install "$HSHDIR" apt-under-pkdirect-checkinstall
 
 PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "${HSHARGS[@]}"
 
-# More thorougher (longer) tests.
-
-hsh --with-stuff --ini "${HSHARGS[@]}"
-hsh-install "$HSHDIR" apt-checkinstall
-
-hsh --with-stuff --ini "${HSHARGS[@]}"
-hsh-install "$HSHDIR" apt-xxtra-heavy-load-checkinstall
-
 ############################################################
 cd ../synaptic/
 readonly Y_rev=gears/sisyphus
@@ -152,3 +144,11 @@ gear -t "$C_rev" --no-compress --hasher -- \
 # gear -t "$C_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
 #      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$C_rev")'"
+
+# More thorougher (longer) tests.
+
+hsh --with-stuff --ini "${HSHARGS[@]}"
+hsh-install "$HSHDIR" apt-checkinstall
+
+hsh --with-stuff --ini "${HSHARGS[@]}"
+hsh-install "$HSHDIR" apt-xxtra-heavy-load-checkinstall
