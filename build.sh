@@ -10,10 +10,11 @@ rm -rfv "$HSHDIR"/repo
 
 ############################################################
 cd ../apt
-#readonly X_rev=wip
+readonly X_rev=wip
+#readonly X_rev=gears/sisyphus
 #readonly X_rev=cksum-types-sha1
 #readonly X_rev=cksum-types
-readonly X_rev=wip
+#readonly X_rev=@ALT/pkgprio-bufsize
 #readonly X_rev=test-cksum-for-archives
 #readonly X_rev=alt
 #readonly X_rev=alt~1
@@ -56,45 +57,17 @@ gear -t "$W_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
 #      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$W_rev")'"
 
+############################################################
 hsh --with-stuff --ini "${HSHARGS[@]}"
+# hack for large-rpm-archive test (which uses openssl)
+#hsh-install "$HSHDIR" openssl
 hsh-install "$HSHDIR" apt-basic-checkinstall
 
-############################################################
-cd ../packagekit/
-#readonly Z_rev=mcpain@ALT/sisyphus
-readonly Z_rev=gears/sisyphus
-#readonly Z_rev=new-ABI-tmp
-#readonly Z_rev=lazyCacheFile
-#readonly Z_rev=lazyCacheFile~1
-
-gear -t "$Z_rev" --no-compress --hasher -- \
-     hsh --with-stuff "${HSHARGS[@]}" \
-     --build-args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$Z_rev")'"
-
-# gear -t "$Z_rev" --no-compress --hasher -- \
-#      hsh-rebuild "$HSHDIR" \
-#      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$Z_rev")'"
+# hsh --with-stuff --ini "${HSHARGS[@]}"
+# hsh-install "$HSHDIR" apt-checkinstall
 
 hsh --with-stuff --ini "${HSHARGS[@]}"
-hsh-install "$HSHDIR" apt-under-pkdirect-checkinstall
-
-PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "${HSHARGS[@]}"
-
-############################################################
-cd ../synaptic/
-readonly Y_rev=gears/sisyphus
-#readonly Y_rev=sisyphus
-# C++17
-#readonly Y_rev=sisyphus~3
-# unique_ptr returned (APT: fix-null-mmap)
-#readonly Y_rev=sisyphus~4
-# ctor wants ref
-#readonly Y_rev=sisyphus~5
-#readonly Y_rev=sisyphus~6
-
-gear -t "$Y_rev" --no-compress --hasher -- \
-     hsh --with-stuff "${HSHARGS[@]}" \
-     --build-args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$Y_rev")'"
+hsh-install "$HSHDIR" apt-xxtra-heavy-load-checkinstall
 
 ############################################################
 cd ../apt-indicator/
@@ -113,10 +86,27 @@ gear -t "$A_rev" --no-compress --hasher -- \
 
 
 ############################################################
+cd ../synaptic/
+#readonly Y_rev=gears/sisyphus
+readonly Y_rev=sisyphus
+# C++17
+#readonly Y_rev=sisyphus~3
+# unique_ptr returned (APT: fix-null-mmap)
+#readonly Y_rev=sisyphus~4
+# ctor wants ref
+#readonly Y_rev=sisyphus~5
+#readonly Y_rev=sisyphus~6
+
+gear -t "$Y_rev" --no-compress --hasher -- \
+     hsh --with-stuff "${HSHARGS[@]}" \
+     --build-args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$Y_rev")'"
+
+############################################################
 cd ../aptitude/
-readonly B_rev=gears/sisyphus
+#readonly B_rev=gears/sisyphus
 #readonly B_rev=alt
 #readonly B_rev=alt~2
+readonly B_rev=pkgAcqFile
 #readonly B_rev=unique_ptr-to-return-mmap
 # ctor wants ref
 #readonly B_rev=unique_ptr-to-return-mmap^
@@ -132,6 +122,23 @@ gear -t "$B_rev" --no-compress --hasher -- \
 #      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$B_rev")'"
 
 ############################################################
+cd ../packagekit/
+#readonly Z_rev=sisyphus
+#readonly Z_rev=mcpain@ALT/sisyphus
+readonly Z_rev=gears/sisyphus
+#readonly Z_rev=new-ABI-tmp
+#readonly Z_rev=lazyCacheFile
+#readonly Z_rev=lazyCacheFile~1
+
+gear -t "$Z_rev" --no-compress --hasher -- \
+     hsh --with-stuff "${HSHARGS[@]}" \
+     --build-args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$Z_rev")'"
+
+# gear -t "$Z_rev" --no-compress --hasher -- \
+#      hsh-rebuild "$HSHDIR" \
+#      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$Z_rev")'"
+
+############################################################
 cd ../perl-AptPkg/
 readonly C_rev=gears/sisyphus
 #readonly C_rev=master
@@ -145,10 +152,17 @@ gear -t "$C_rev" --no-compress --hasher -- \
 #      hsh-rebuild "$HSHDIR" \
 #      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$C_rev")'"
 
+############################################################
+hsh --with-stuff --ini "${HSHARGS[@]}"
+hsh-install "$HSHDIR" apt-under-pkdirect-checkinstall
+
+PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "${HSHARGS[@]}"
+
+############################################################
 # More thorougher (longer) tests.
 
-hsh --with-stuff --ini "${HSHARGS[@]}"
-hsh-install "$HSHDIR" apt-checkinstall
+# hsh --with-stuff --ini "${HSHARGS[@]}"
+# hsh-install "$HSHDIR" apt-checkinstall
 
-hsh --with-stuff --ini "${HSHARGS[@]}"
-hsh-install "$HSHDIR" apt-xxtra-heavy-load-checkinstall
+# hsh --with-stuff --ini "${HSHARGS[@]}"
+# hsh-install "$HSHDIR" apt-xxtra-heavy-load-checkinstall
