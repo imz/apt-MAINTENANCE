@@ -2,7 +2,7 @@
 set -o pipefail
 
 readonly HSHDIR="$1"; shift
-readonly HSHARGS=("$HSHDIR" "$@")
+readonly HSHARGS=(--workdir="$HSHDIR" "$@")
 
 #hsh --clean "$HSHDIR"
 # Don't delete the cache:
@@ -40,7 +40,7 @@ gear -t "$X_rev" --no-compress --hasher -- \
      --build-args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$X_rev")'"
 
 # gear -t "$X_rev" --no-compress --hasher -- \
-#      hsh-rebuild "$HSHDIR" \
+#      hsh-rebuild --workdir="$HSHDIR" \
 #      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$X_rev")'"
 
 ############################################################
@@ -54,20 +54,20 @@ gear -t "$W_rev" --no-compress --hasher -- \
      --build-args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$W_rev")' --disable check"
 
 # gear -t "$W_rev" --no-compress --hasher -- \
-#      hsh-rebuild "$HSHDIR" \
+#      hsh-rebuild --workdir="$HSHDIR" \
 #      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$W_rev")'"
 
 ############################################################
 hsh --with-stuff --ini "${HSHARGS[@]}"
 # hack for large-rpm-archive test (which uses openssl)
-#hsh-install "$HSHDIR" openssl
-hsh-install "$HSHDIR" apt-basic-checkinstall
+#hsh-install --workdir="$HSHDIR" openssl
+hsh-install --workdir="$HSHDIR" apt-basic-checkinstall
 
 # hsh --with-stuff --ini "${HSHARGS[@]}"
-# hsh-install "$HSHDIR" apt-checkinstall
+# hsh-install --workdir="$HSHDIR" apt-checkinstall
 
 hsh --with-stuff --ini "${HSHARGS[@]}"
-hsh-install "$HSHDIR" apt-xxtra-heavy-load-checkinstall
+hsh-install --workdir="$HSHDIR" apt-xxtra-heavy-load-checkinstall
 
 ############################################################
 cd ../apt-indicator/
@@ -81,7 +81,7 @@ gear -t "$A_rev" --no-compress --hasher -- \
      --build-args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$A_rev")'"
 
 # gear -t "$A_rev" --no-compress --hasher -- \
-#      hsh-rebuild "$HSHDIR" \
+#      hsh-rebuild --workdir="$HSHDIR" \
 #      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$A_rev")'"
 
 
@@ -118,7 +118,7 @@ gear -t "$B_rev" --no-compress --hasher -- \
      --build-args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$B_rev")'"
 
 # gear -t "$B_rev" --no-compress --hasher -- \
-#      hsh-rebuild "$HSHDIR" \
+#      hsh-rebuild --workdir="$HSHDIR" \
 #      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$B_rev")'"
 
 ############################################################
@@ -135,7 +135,7 @@ gear -t "$Z_rev" --no-compress --hasher -- \
      --build-args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$Z_rev")'"
 
 # gear -t "$Z_rev" --no-compress --hasher -- \
-#      hsh-rebuild "$HSHDIR" \
+#      hsh-rebuild --workdir="$HSHDIR" \
 #      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$Z_rev")'"
 
 ############################################################
@@ -149,12 +149,12 @@ gear -t "$C_rev" --no-compress --hasher -- \
      --build-args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$C_rev")'"
 
 # gear -t "$C_rev" --no-compress --hasher -- \
-#      hsh-rebuild "$HSHDIR" \
+#      hsh-rebuild --workdir="$HSHDIR" \
 #      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$C_rev")'"
 
 ############################################################
 hsh --with-stuff --ini "${HSHARGS[@]}"
-hsh-install "$HSHDIR" apt-under-pkdirect-checkinstall
+hsh-install --workdir="$HSHDIR" apt-under-pkdirect-checkinstall
 
 PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "${HSHARGS[@]}"
 
@@ -162,7 +162,7 @@ PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "${HSHARGS[@]}"
 # More thorougher (longer) tests.
 
 # hsh --with-stuff --ini "${HSHARGS[@]}"
-# hsh-install "$HSHDIR" apt-checkinstall
+# hsh-install --workdir="$HSHDIR" apt-checkinstall
 
 # hsh --with-stuff --ini "${HSHARGS[@]}"
-# hsh-install "$HSHDIR" apt-xxtra-heavy-load-checkinstall
+# hsh-install --workdir="$HSHDIR" apt-xxtra-heavy-load-checkinstall
