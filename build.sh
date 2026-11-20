@@ -66,8 +66,8 @@ hsh-install --workdir="$HSHDIR" apt-basic-checkinstall
 # hsh --with-stuff --ini "${HSHARGS[@]}"
 # hsh-install --workdir="$HSHDIR" apt-checkinstall
 
-hsh --with-stuff --ini "${HSHARGS[@]}"
-hsh-install --workdir="$HSHDIR" apt-xxtra-heavy-load-checkinstall
+# hsh --with-stuff --ini "${HSHARGS[@]}"
+# hsh-install --workdir="$HSHDIR" apt-xxtra-heavy-load-checkinstall
 
 ############################################################
 cd ../apt-indicator/
@@ -161,8 +161,8 @@ PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "${HSHARGS[@]}"
 ############################################################
 # More thorough (longer) tests.
 
-# hsh --with-stuff --ini "${HSHARGS[@]}"
-# hsh-install --workdir="$HSHDIR" apt-checkinstall
+hsh --with-stuff --ini "${HSHARGS[@]}"
+hsh-install --workdir="$HSHDIR" apt-checkinstall
 
-# hsh --with-stuff --ini "${HSHARGS[@]}"
-# hsh-install --workdir="$HSHDIR" apt-xxtra-heavy-load-checkinstall
+hsh --with-stuff --ini "${HSHARGS[@]}"
+hsh-install --workdir="$HSHDIR" apt-xxtra-heavy-load-checkinstall
