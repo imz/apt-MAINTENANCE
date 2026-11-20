@@ -159,7 +159,7 @@ hsh-install --workdir="$HSHDIR" apt-under-pkdirect-checkinstall
 PATH=~/bin:"$PATH" ../apt/test-pk-in-hsh.sh --ini SAME "${HSHARGS[@]}"
 
 ############################################################
-# More thorougher (longer) tests.
+# More thorough (longer) tests.
 
 # hsh --with-stuff --ini "${HSHARGS[@]}"
 # hsh-install --workdir="$HSHDIR" apt-checkinstall
