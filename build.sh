@@ -44,6 +44,20 @@ gear -t "$X_rev" --no-compress --hasher -- \
 #      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$X_rev")'"
 
 ############################################################
+cd ../apt-repo-tools/
+#readonly W_rev=@ALT/sha2
+readonly W_rev=gears/sisyphus
+
+# --disable check ? (anyway it will be tested in girar)
+gear -t "$W_rev" --no-compress --hasher -- \
+     hsh --with-stuff "${HSHARGS[@]}" \
+     --build-args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$W_rev")' --disable check"
+
+# gear -t "$W_rev" --no-compress --hasher -- \
+#      hsh-rebuild --workdir="$HSHDIR" \
+#      --args="--define 'disttag %(rpm --eval %%_priority_distbranch)+$(git rev-parse "$W_rev")'"
+
+############################################################
 hsh --with-stuff --ini "${HSHARGS[@]}"
 # hack for large-rpm-archive test (which uses openssl)
 #hsh-install --workdir="$HSHDIR" openssl
